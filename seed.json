@@ -1,0 +1,144 @@
+{   
+    "freedivers": [
+        {
+            "first_name": "Ronja",
+            "last_name": "Larsson",
+            "age": "33"
+        },
+        {
+            "first_name": "Ove",
+            "last_name": "Larsson",
+            "age": "62"
+        },
+        {
+            "first_name": "Emma",
+            "last_name": "Shih",
+            "age": "56"
+        },
+        {
+            "first_name": "Jonas",
+            "last_name": "Weber",
+            "age": "34"
+        },
+        {
+            "first_name": "Anton",
+            "last_name": "Appelblom",
+            "age": "31"
+        }
+    ],
+    
+    "freedives": [
+        {
+            "depth_m": "23.4",
+            "discipline": "FIM",
+            "dive_time_sec": "114",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-29",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "33.4",
+            "discipline": "FIM",
+            "dive_time_sec": "138",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-29",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "39.2",
+            "discipline": "FIM",
+            "dive_time_sec": "107",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-29",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "41.1",
+            "discipline": "FIM",
+            "dive_time_sec": "115",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-29",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "41.7",
+            "discipline": "FIM",
+            "dive_time_sec": "108",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-29",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "32.8",
+            "discipline": "FIM",
+            "dive_time_sec": "88",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-29",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "24.2",
+            "discipline": "FIM",
+            "dive_time_sec": "63",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-26",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "38.1",
+            "discipline": "FIM",
+            "dive_time_sec": "112",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-26",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "35.6",
+            "discipline": "FIM",
+            "dive_time_sec": "95",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-26",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "37.8",
+            "discipline": "FIM",
+            "dive_time_sec": "108",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-26",
+            "diver_id": "1"
+        },
+        {
+            "depth_m": "42.7",
+            "discipline": "FIM",
+            "dive_time_sec": "110",
+            "down_speed_m_per_sec": "1",
+            "up_speed_m_per_sec": "1",
+            "dive_site": "Tabaiba",
+            "date": "2023-01-26",
+            "diver_id": "1"
+        }
+    ]
+}
+
+        
