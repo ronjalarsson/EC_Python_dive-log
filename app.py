@@ -37,6 +37,7 @@ def get_all_freedivers():
     res = requests.get(url("/freedivers"))
     if not res.status_code == 200:
         return
+
     data = res.json()
     for freediver in data:
         freediver = Freediver(id=freediver[0], first_name=freediver[1], last_name=freediver[2], age=freediver[3])
@@ -59,6 +60,10 @@ def get_diver_by_id():
         return
 
     data = res.json()
+    if not data:
+        print("Freediver with this ID not found.")
+        return
+
     for info in data:
         freediver = Freediver(id=info[0], first_name=info[1], last_name=info[2], age=info[3])    
         print("__________")
@@ -69,12 +74,18 @@ def get_diver_by_id():
 
 def get_diver_by_name():
     diver_to_get = input("Please enter the first name of the freediver: ")
+    diver_to_get = diver_to_get.strip().capitalize()
     print("Getting your data ready...")
     res = requests.get(url(f"/freediver_by_name/{diver_to_get}"))
     if res.status_code == 404:
         print("Freediver not found.")
         return
+
     data = res.json()
+    if not data:
+        print("Freediver with this name not found.")
+        return
+
     for info in data:
         freediver = Freediver(id=info[0], first_name=info[1], last_name=info[2], age=info[3])    
         print("__________")
@@ -83,17 +94,18 @@ def get_diver_by_name():
         print(f"Age: {freediver.age}")
 
 def get_all_dives():
-    freedives = []
+    #freedives = []
     print("Getting a list of all logged dives...")
     res = requests.get(url("/dive_logs")) 
     if not res.status_code == 200:
         return
+        
     data = res.json()
     for dive in data:
         dive = FreediveLog(id=dive[0], depth_m=dive[1], discipline=dive[2], dive_time_sec=dive[3], down_speed_m_per_sec=dive[4], up_speed_m_per_sec=dive[5], dive_site=dive[6], date=dive[7], diver_id=dive[8])
         print("__________")
-        print(f"Diver ID: {dive.diver_id}")
         print(f"Dive ID: {dive.id}")
+        print(f"Diver ID: {dive.diver_id}")
         print(f"Depth in meter: {dive.depth_m}")
         print(f"Discipline: {dive.discipline}")
         print(f"Dive time in seconds: {dive.dive_time_sec}")
@@ -116,6 +128,10 @@ def get_dive_by_id():
         return
    
     data = res.json()
+    if not data:
+        print("There is not a log with this dive ID.")
+        return
+
     for info in data:
         dive = FreediveLog(id=info[0], depth_m=info[1], discipline=info[2], dive_time_sec=info[3], down_speed_m_per_sec=info[4], up_speed_m_per_sec=info[5], dive_site=info[6], date=info[7], diver_id=info[8])
         print("__________")
@@ -131,6 +147,7 @@ def get_dive_by_id():
 
 def add_new_freediver():
     print("Please enter below information for the new diver.")
+    print("__________")
     first_name = input("First Name: ")
     last_name = input("Last name: ")
     age = input("Age: ")
@@ -141,6 +158,7 @@ def add_new_freediver():
     
 def log_new_dive():
     print("Please enter your dive data...")
+    print("__________")
     diver_id = input("Diver ID: ")
     depth_m = input("Depth in meter: ")
     discipline = input("Discipline: ")
