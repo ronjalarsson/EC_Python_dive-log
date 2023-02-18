@@ -1,7 +1,7 @@
 # Databaslogiken i denna fil
 import sqlite3
 import os
-from typing import Tuple, Dict
+from typing import Tuple, Dict, List, Any
 
 class DB:
     db_url: str #Det är en url som leder till db
@@ -15,7 +15,7 @@ class DB:
     
     def __set_up_db(self): 
         conn = sqlite3.connect(self.db_url)
-        with open("setup.sql", "r") as file: # Öppna sql filen
+        with open("setup.sql", "r") as file: # Öppna sql filen setup.sql
             script = file.read() # Läser sql filen
             conn.executescript(script) # Kör sql filen i sqlite3
             conn.commit()
@@ -30,10 +30,17 @@ class DB:
         conn.commit()
         conn.close()
         return data
+
+    def __get_columns(self, table: str) -> List[str]:
+        query = f"""
+        PRAGMA table_info({table}) 
+        """ # PRAGMA används för att hämta info om en table, inklusive namn på kolumen
+        data = self.__call_db(query)
+        return [row[1] for row in data] # Returnerar en lista med kolumnnamen
     
     # Metoder som kan användas i andra filer (api.py)
     # Hämta data
-    def get(self, *, table: str, where: Tuple[str, str] | None = None): # where är optiopnal här
+    def get(self, *, table: str, where: Tuple[str, str] | None = None) -> List[Dict[str, Any]]: # where är optiopnal här
         query = f"""
         SELECT * 
         FROM {table}
@@ -45,7 +52,11 @@ class DB:
             """
             query = query + query_with_where
         data = self.__call_db(query)
-        return data
+
+        # Konverterar tupple list till dict med __get_columns metod
+        columns = self.__get_columns(table)
+        result = [dict(zip(columns, row)) for row in data] # zip används för att kombinera kolumnnamen med data
+        return result
     
     # Skapa data/lägg till ny data
     def insert(self, *, table: str, fields: Dict[str, str]): 

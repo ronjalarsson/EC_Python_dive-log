@@ -1,3 +1,4 @@
+# Allt funkar per idag 20230218
 from typing import List 
 # requests gör att vi kan koppla på API med funktionerna i denna fil
 import requests
@@ -40,7 +41,7 @@ def get_all_freedivers():
 
     data = res.json()
     for freediver in data:
-        freediver = Freediver(id=freediver[0], first_name=freediver[1], last_name=freediver[2], age=freediver[3])
+        freediver = Freediver(id=freediver["id"], first_name=freediver["first_name"], last_name=freediver["last_name"], age=freediver["age"])
         print("__________")
         print(f"Diver ID: {freediver.id}")
         print(f"Name: {freediver.first_name} {freediver.last_name}")
@@ -65,7 +66,7 @@ def get_diver_by_id():
         return
 
     for info in data:
-        freediver = Freediver(id=info[0], first_name=info[1], last_name=info[2], age=info[3])    
+        freediver = Freediver(id=info["id"], first_name=info["first_name"], last_name=info["last_name"], age=info["age"])    
         print("__________")
         print(f"Diver ID: {freediver.id}")
         print(f"Name: {freediver.first_name} {freediver.last_name}")
@@ -87,7 +88,7 @@ def get_diver_by_name():
         return
 
     for info in data:
-        freediver = Freediver(id=info[0], first_name=info[1], last_name=info[2], age=info[3])    
+        freediver = Freediver(id=info["id"], first_name=info["first_name"], last_name=info["last_name"], age=info["age"])    
         print("__________")
         print(f"Diver ID: {freediver.id}")
         print(f"Name: {freediver.first_name} {freediver.last_name}")
@@ -102,7 +103,7 @@ def get_all_dives():
         
     data = res.json()
     for dive in data:
-        dive = FreediveLog(id=dive[0], depth_m=dive[1], discipline=dive[2], dive_time_sec=dive[3], down_speed_m_per_sec=dive[4], up_speed_m_per_sec=dive[5], dive_site=dive[6], date=dive[7], diver_id=dive[8])
+        dive = FreediveLog(id=dive["id"], depth_m=dive["depth_m"], discipline=dive["discipline"], dive_time_sec=dive["dive_time_sec"], down_speed_m_per_sec=dive["down_speed_m_per_sec"], up_speed_m_per_sec=dive["up_speed_m_per_sec"], dive_site=dive["dive_site"], date=dive["date"], diver_id=dive["diver_id"])
         print("__________")
         print(f"Dive ID: {dive.id}")
         print(f"Diver ID: {dive.diver_id}")
@@ -133,7 +134,7 @@ def get_dive_by_id():
         return
 
     for info in data:
-        dive = FreediveLog(id=info[0], depth_m=info[1], discipline=info[2], dive_time_sec=info[3], down_speed_m_per_sec=info[4], up_speed_m_per_sec=info[5], dive_site=info[6], date=info[7], diver_id=info[8])
+        dive = FreediveLog(id=info["id"], depth_m=info["depth_m"], discipline=info["discipline"], dive_time_sec=info["dive_time_sec"], down_speed_m_per_sec=info["down_speed_m_per_sec"], up_speed_m_per_sec=info["up_speed_m_per_sec"], dive_site=info["dive_site"], date=info["date"], diver_id=info["diver_id"])
         print("__________")
         print(f"Diver ID: {dive.diver_id}")
         print(f"Dive ID: {dive.id}")

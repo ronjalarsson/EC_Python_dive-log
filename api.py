@@ -1,6 +1,6 @@
-# Allt funkar per idag 20230216
+# Allt funkar per idag 20230218
 from fastapi import FastAPI
-from typing import List
+from typing import List, Dict
 from fastapi.responses import HTMLResponse
 
 from models import FreediveLog, Freediver, UpdateFreediver, UpdateFreediveLog
