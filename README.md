@@ -1,6 +1,9 @@
 # dive-log
 This is a project for a course in my school, EC Utbildning, where I build a dive log to record my dives.
 
+# freediving
+My biggest passion in life is - you guessed it - freediving. For this project in school we are building an API and a programme that communicates with the a database. There should also seed file where we can seed data to the database. So I decided to build a personal dive log to log my freedives.
+
 # file structure
 There are a total of 8 files in this project as described below.
 
