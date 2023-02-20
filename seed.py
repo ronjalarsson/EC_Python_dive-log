@@ -1,3 +1,4 @@
+# Denna fil seedar data fr en json fil till db
 import json
 import sqlite3
 
@@ -6,8 +7,8 @@ conn = sqlite3.connect("freedive.db")
 cursor = conn.cursor()
 
 # Öppnar JSON fil och hämtar data
-with open("seed.json") as f:
-    data = json.load(f)
+with open("seed.json") as file:
+    data = json.load(file)
 
 # Lägger in data till tables
 # Seedar data för table freedivers
@@ -40,6 +41,6 @@ for record in data["freedives"]:
     values = (record["depth_m"], record["discipline"], record["dive_time_sec"], record["down_speed_m_per_sec"], record["up_speed_m_per_sec"], record["dive_site"], record["date"], record["diver_id"])
     cursor.execute(query, values)
 
-# Commitar uppdateringen och stänger ner
+# Commitar uppdateringen och stänger ner kopplingen till databasen
 conn.commit()
 conn.close()

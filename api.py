@@ -1,19 +1,19 @@
-# Allt funkar per idag 20230218
+# Allt funkar i Thunder Client per idag 20230220
 from fastapi import FastAPI
 from typing import List, Dict
 from fastapi.responses import HTMLResponse
-
+# Importer fr mina egna filer
 from models import FreediveLog, Freediver, UpdateFreediver, UpdateFreediveLog
 from db import DB
 
 app = FastAPI()
-db = DB("freedive.db")
+db = DB("freedive.db") # Skapar db freedive.db
 
 app.freedivers: List[Freediver] = []
-app.curr_diver_id = 1 # Fungerar detta?
+app.curr_diver_id = 1 
 
 app.freedives: List[FreediveLog] = []
-app.curr_dive_id = 1 # Fungerar detta?
+app.curr_dive_id = 1 
 
 # Minst 2 "routes/endpoints" för att hämta olika typer av data (GET)
 @app.get("/", response_class=HTMLResponse) # Kan koppla root page till en HTML, jag behöver ej ha detta i slutinlämningen
@@ -44,6 +44,11 @@ def get_freedives():
 @app.get("/dive_logs/{id}") # Returnera ett specifik dyk med tillhörande dyk id
 def get_freedive_by_id(id:int):
     data = db.get(table="freedives", where=("id", str(id)))
+    return data
+
+@app.get("/dive_logs_by_freediver/{id}") # Returnera alla loggade dyk från vald fidykare
+def get_freedives_by_freediver(id:int):
+    data = db.get(table="freedives", where=("diver_id", str(id)))
     return data
 
 # Minst 2 "routes/endpoints" för att skapa data (POST)
@@ -78,8 +83,8 @@ def log_freedive(freedive: FreediveLog):
             "diver_id":str(freedive.diver_id)
         })
 
-
 # Minst 1 "route/endpoints" för att uppdatera data (PUT)  
+# Kom ihåg att lägga till id i body (json) när man checkar i Thunder Client
 @app.put("/update_freediver/{id}") # Uppdatera en dykares info
 def update_freediver(freediver: UpdateFreediver):
     data = db.update(
@@ -91,7 +96,8 @@ def update_freediver(freediver: UpdateFreediver):
         where=("id", str(freediver.id))
     )
     return data
- 
+
+# Kom ihåg att lägga till id i body (json) när man checkar i Thunder Client
 @app.put("/update_dive_log/{id}") # Uppdatera ett redan loggat dyk
 def update_freedive(freedive: UpdateFreediveLog):
     data = db.update(

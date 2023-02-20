@@ -39,7 +39,7 @@ class DB:
         return [row[1] for row in data] # Returnerar en lista med kolumnnamen
     
     # Metoder som kan användas i andra filer (api.py)
-    # Hämta data
+    # Hämtar data
     def get(self, *, table: str, where: Tuple[str, str] | None = None) -> List[Dict[str, Any]]: # where är optiopnal här
         query = f"""
         SELECT * 
@@ -52,13 +52,11 @@ class DB:
             """
             query = query + query_with_where
         data = self.__call_db(query)
-
-        # Konverterar tupple list till dict med __get_columns metod
-        columns = self.__get_columns(table)
+        columns = self.__get_columns(table) # Konverterar tupple list till dict med __get_columns metod
         result = [dict(zip(columns, row)) for row in data] # zip används för att kombinera kolumnnamen med data
         return result
     
-    # Skapa data/lägg till ny data
+    # Skapar data/lägger till ny data
     def insert(self, *, table: str, fields: Dict[str, str]): 
         keys = ",".join(fields.keys())
         values = "','".join(fields.values())
@@ -73,7 +71,7 @@ class DB:
         data = self.__call_db(query)
         return data
 
-    # Uppdatera data
+    # Uppdaterar data
     def update(self, *, table: str, where: Tuple[str, str], fields: Dict[str, str]):
         where_key, where_value = where
         field_query = ""
@@ -90,7 +88,7 @@ class DB:
         print(update_query)
         return self.__call_db(update_query)
 
-    # Radera data
+    # Raderar data
     def delete(self, *, table: str, id: int):
         delete_query = f"""
         DELETE FROM {table}

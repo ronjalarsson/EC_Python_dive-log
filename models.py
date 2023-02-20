@@ -1,7 +1,8 @@
+# BaseModel är en datamodell som fungerar som en dataklass som inte behöver init-metoder
 from pydantic import BaseModel, validator
-from typing import Optional
+from typing import Optional, Union
 
-# Nedan BaseModel är som en data class som vi slipper init metoder i klasser
+# Nedan är pydantic datamodeller som kommer fr BaseModel
 class Freediver(BaseModel):
     id: int = None
     first_name: str
@@ -19,25 +20,27 @@ class FreediveLog(BaseModel):
     depth_m: float
     discipline: str
     dive_time_sec: int
-    down_speed_m_per_sec: Optional[float] = None # Funkar inte. Får errors när jag skippa fylla i dessa None column
-    up_speed_m_per_sec: Optional[float] = None # Funkar inte. Får errors när jag skippa fylla i dessa None column
+    down_speed_m_per_sec: Optional[Union[float, None]] = None 
+    up_speed_m_per_sec: Optional[Union[float, None]] = None 
     dive_site: str
     date: str
     diver_id: int
 
-    #@validator('down_speed_m_per_sec', 'up_speed_m_per_sec', pre=True)
-    #def validate_float(cls, v):
-    #    if v is not None and not isinstance(v, float):
-    #        raise ValueError('value is not a valid float')
-    #    return v
+    # Kollar om data är en tom sträng, om ja, returnerar "None" -> konverterar all tomma strängar för down_speed o up_speed kolunmer
+    # Detta säkerställer att värde i dessa kolunmer alltid är float eller None
+    @validator('down_speed_m_per_sec', 'up_speed_m_per_sec', pre=True)
+    def validate_optional_fields(cls, v):
+        if v == "":
+            return None
+        return v
 
 class UpdateFreediveLog(BaseModel):
     id: int 
     depth_m: float = None
     discipline: str = None
     dive_time_sec: int = None
-    down_speed_m_per_sec: Optional[float] = None # Funkar inte. Får errors när jag skippa fylla i dessa None column
-    up_speed_m_per_sec: Optional[float] = None # Funkar inte. Får errors när jag skippa fylla i dessa None column
+    down_speed_m_per_sec: Optional[Union[float, None]] = None 
+    up_speed_m_per_sec: Optional[Union[float, None]] = None 
     dive_site: str = None
     date: str = None
     diver_id: int = None
